@@ -16,13 +16,6 @@
 								<xsl:attribute name="value"><xsl:value-of select="value"/></xsl:attribute>
 							</input><br/>
 						</xsl:for-each>
-						<xsl:for-each select="textView">
-							<label><xsl:value-of select="label"/></label>
-							<input>
-								<xsl:attribute name="name"><xsl:value-of select="name"/></xsl:attribute>
-								<xsl:attribute name="value"><xsl:value-of select="value"/></xsl:attribute>
-							</input><br/>
-						</xsl:for-each>
 						<xsl:for-each select="buttonView">
 							<label><xsl:value-of select="label"/></label>
 							<input type="submit">

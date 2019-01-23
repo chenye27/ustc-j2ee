@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OR-Mapping>
+	<jdbc>
+		<property>
+			<name>driver_class</name>
+			<value>com.jdbc.sql.Driver</value>
+		</property>
+		<property>
+			<name>url_path</name>
+			<value>jdbc:mysql://localhost:3306/2333</value>
+		</property>
+		<property>
+			<name>db_username</name>
+			<value></value>
+		</property>
+		
+	</jdbc>
+</OR-Mapping>

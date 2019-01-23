@@ -5,11 +5,11 @@ public class LoginAction implements LoginInterface {
 	@Override
 	public  String handlelogin(String name,String pwd) {
 		// TODO Auto-generated method stub
-		if(name.equals("world")&&pwd.equals("abc")) {
+		UserBean userbean = new UserBean(null,name,pwd);
+		boolean flag = userbean.signIn();
+		if(flag==true) {
 			return new String("success");
 		}else  return new String("failure"); 
 		
 	}
-
-	
 }
