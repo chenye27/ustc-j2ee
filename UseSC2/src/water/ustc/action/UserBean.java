@@ -10,8 +10,8 @@ public class UserBean {
 	
 	private static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String MYSQL_URL = "jdbc:mysql://localhost:3306/2333";
-	private static final String MYSQL_USERNAME = "baoshun";
-	private static final String MYSQL_PASSWORD = "12345678";
+	private static final String MYSQL_USERNAME = "root";
+	private static final String MYSQL_PASSWORD = "bhpw4065";
 	
 	public UserBean(String userId,String userName,String userPass) {
 		this.userId = userId;
@@ -20,23 +20,14 @@ public class UserBean {
 	}
 	
 	public boolean signIn() {
-		boolean flag = false;
-		String sql = "select * from user "+"where username='"+userName+"'";
-		UserBean userBean = (UserBean) new UserDAO(
-				MYSQL_DRIVER, MYSQL_URL, MYSQL_USERNAME, MYSQL_PASSWORD).query(sql);
-		if(userBean == null) {
-			//用户不存在
-			return false;
+		UserDAO  userdao = new UserDAO();
+		try{
+			if(userPass.equals((userdao.query(userName, false)).getUserPass())) return true;
+			else return false;
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		else {
-			if(userBean.getUserPass().equals(userPass)) {
-				return true;
-			}
-			else {
-				//密码错误
-				return false;
-			}
-		}
+		return false;
 	}
 
 	public String getUserId() {
