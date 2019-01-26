@@ -3,7 +3,7 @@
 	<jdbc>
 		<property>
 			<name>driver_class</name>
-			<value>com.jdbc.sql.Driver</value>
+			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property>
 			<name>url_path</name>

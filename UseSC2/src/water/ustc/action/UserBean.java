@@ -3,15 +3,10 @@ package water.ustc.action;
 import water.ustc.dao.UserDAO;
 
 public class UserBean {
-	private UserDAO userdao;
 	private String userId;
 	private String userName;
 	private String userPass;
 	
-	private static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String MYSQL_URL = "jdbc:mysql://localhost:3306/2333";
-	private static final String MYSQL_USERNAME = "root";
-	private static final String MYSQL_PASSWORD = "bhpw4065";
 	
 	public UserBean(String userId,String userName,String userPass) {
 		this.userId = userId;
@@ -38,7 +33,11 @@ public class UserBean {
 		return userName;
 	}
 
-	public String getUserPass() {
+	public String getUserPass()throws Exception {
+		if(userPass == null) {
+			System.out.println("配置了延时加载");
+			userPass = ((new UserDAO()).query(userName, true)).getUserPass();
+		}
 		return userPass;
 	}
 

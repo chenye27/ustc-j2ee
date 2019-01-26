@@ -14,7 +14,8 @@ public class Configuration {
 	
 	static {
 		try {
-			String file = Thread.currentThread().getContextClassLoader().getResource("").getPath()+"or_mapping.xml";
+			String file = Thread.currentThread().getContextClassLoader().getResource("").getPath() + "or_mapping.xml";
+			System.out.println(file);
 			Document dc = (new SAXReader()).read(new File(file));
 			List<Element> jdbc = dc.getRootElement().element("jdbc").elements("property");
 			classes = dc.getRootElement().elements("class");

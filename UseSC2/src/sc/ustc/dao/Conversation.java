@@ -1,16 +1,10 @@
 package sc.ustc.dao;
 
-import java.lang.annotation.ElementType;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.List;
-
 import org.dom4j.Element;
-
-
 import water.ustc.action.UserBean;
+import java.sql.*;
 
 public class Conversation {
 	static {
@@ -39,7 +33,7 @@ public class Conversation {
 		return false;
 	}
 	
-	public static UserBean getUser(String property, Object value)throws Exception{
+	public static UserBean getUser(String property, Object value,boolean ignLazy)throws Exception{
 		System.out.println("getUser:");
 		UserBean  userbean =  null;
 		List<Element> properties = null;	
@@ -67,19 +61,24 @@ public class Conversation {
 			break;
 		}
 		if(table == null) return null;
-		System.out.println(table);
-		String sql = "select "+PK+((islazy)?"":","+field) + " from " +table+" where " +PK+"='"+(String)value+"'";
+//		System.out.println(table);
+		String sql =null;
+		if(ignLazy == false) {
+			 sql = "select "+PK+((islazy)?"":","+field) + " from " +table+" where " +PK+"='"+(String)value+"'";
+		}
+		else sql = "select "+PK+","+field + " from " +table+" where " +PK+"='"+(String)value+"'";
 		Statement stat = con.createStatement();
 		ResultSet rs = stat.executeQuery(sql);
+//		System.out.println(rs);
 		int count =0;
 		String userId = null;
 		String userName = null;
 		String password = null;
-		while(rs.next()) {
-			userId = rs.getString("id");
+		while(rs.next()) { 
 			userName = rs.getString("username");
-			password = rs.getString("password");
-			System.out.println(userId+"  "+userName+"   "+password);
+//			System.out.println(userName);
+			if(ignLazy == true)	 password = rs.getString("password");
+
 			count++;
 		}
 		if(count == 1) {
